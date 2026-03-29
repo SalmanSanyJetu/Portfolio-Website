@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Section from './ui/Section';
-import { Linkedin, Github, Youtube, Instagram, Facebook, Send } from 'lucide-react';
+import { Linkedin, Github, Youtube, Instagram, Facebook } from 'lucide-react';
+
+const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+);
 
 const Contact: React.FC = () => {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormState({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
-  };
 
   const socialLinks = [
     { icon: Facebook, href: 'https://www.facebook.com/SalmanSanyJetu', color: 'hover:text-blue-600' },
@@ -55,64 +46,25 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
-        {/* Form */}
+        {/* WhatsApp Contact */}
         <div>
-           <form onSubmit={handleSubmit} className="space-y-4">
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-               <div className="space-y-2">
-                 <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Name</label>
-                 <input 
-                   type="text" 
-                   required
-                   value={formState.name}
-                   onChange={e => setFormState({...formState, name: e.target.value})}
-                   className="w-full bg-white dark:bg-dark-card border border-gray-300 dark:border-white/10 rounded-lg p-3 text-gray-900 dark:text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
-                   placeholder="Your Name"
-                 />
-               </div>
-               <div className="space-y-2">
-                 <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Email</label>
-                 <input 
-                   type="email" 
-                   required
-                   value={formState.email}
-                   onChange={e => setFormState({...formState, email: e.target.value})}
-                   className="w-full bg-white dark:bg-dark-card border border-gray-300 dark:border-white/10 rounded-lg p-3 text-gray-900 dark:text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
-                   placeholder="your@email.com"
-                 />
-               </div>
-             </div>
-             
-             <div className="space-y-2">
-               <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Message</label>
-               <textarea 
-                 rows={5}
-                 required
-                 value={formState.message}
-                 onChange={e => setFormState({...formState, message: e.target.value})}
-                 className="w-full bg-white dark:bg-dark-card border border-gray-300 dark:border-white/10 rounded-lg p-3 text-gray-900 dark:text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all resize-none"
-                 placeholder="How can I help you?"
-               />
-             </div>
-
-             <button 
-               type="submit" 
-               disabled={isSubmitting || submitted}
-               className={`w-full py-4 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${
-                 submitted 
-                 ? 'bg-green-500 text-white' 
-                 : 'bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-neon-cyan dark:hover:bg-neon-cyan hover:text-black dark:hover:text-black hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,170,0,0.4)]'
-               }`}
-             >
-               {isSubmitting ? (
-                 <span className="animate-pulse">Sending...</span>
-               ) : submitted ? (
-                 <span>Message Sent!</span>
-               ) : (
-                 <>Send Message <Send size={18} /></>
-               )}
-             </button>
-           </form>
+          <div className="flex flex-col justify-center items-center bg-white dark:bg-dark-card p-8 rounded-2xl border border-gray-200 dark:border-white/5 transition-colors duration-300 shadow-sm dark:shadow-none h-full">
+            <div className="w-20 h-20 bg-[#25D366]/10 rounded-full flex items-center justify-center mb-6">
+              <WhatsAppIcon size={40} className="text-[#25D366]" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">Chat on WhatsApp</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 text-center transition-colors duration-300">
+              The fastest way to reach me for projects or collaborations.
+            </p>
+            <a 
+              href="https://wa.me/8801575332918" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full py-4 rounded-lg font-bold flex items-center justify-center gap-2 transition-all bg-[#25D366] text-white hover:bg-[#20bd5a] hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
+            >
+              <WhatsAppIcon size={20} /> +8801575332918
+            </a>
+          </div>
         </div>
 
       </div>
