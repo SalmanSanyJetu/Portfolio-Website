@@ -2,6 +2,7 @@ import React from 'react';
 import Section from './ui/Section';
 import { SKILL_CATEGORIES } from '../constants';
 import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 
 const Skills: React.FC = () => {
   return (
@@ -43,6 +44,32 @@ const Skills: React.FC = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* Previous Completed Works Link Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-12 bg-white dark:bg-dark-card border border-neon-cyan/30 dark:border-neon-cyan/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg hover:border-neon-cyan transition-all duration-300"
+      >
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-neon-cyan/10 rounded-xl text-neon-cyan">
+            <ExternalLink size={24} />
+          </div>
+          <div className="text-left">
+            <h4 className="text-lg font-bold text-gray-900 dark:text-white">Previous Completed Works</h4>
+            <p className="text-sm text-gray-500 dark:text-gray-400">View my comprehensive collection of engineering designs, models, and presentations.</p>
+          </div>
+        </div>
+        <a
+          href="https://drive.google.com/drive/folders/15FWkGYTMCNRT0pG1tB9nlfyXyCxXTq9b?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full sm:w-auto px-6 py-3 bg-neon-cyan text-black hover:bg-neon-cyan/80 font-bold rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(0,255,242,0.3)] hover:shadow-[0_0_25px_rgba(0,255,242,0.5)] flex items-center justify-center gap-2 shrink-0"
+        >
+          Explore Drive Folder <ExternalLink size={18} />
+        </a>
+      </motion.div>
 
       {/* Marquee Effect for Quick Keywords */}
       <div className="mt-16 overflow-hidden relative w-full py-4 bg-gray-100/50 dark:bg-white/5 backdrop-blur-sm transform -rotate-1 transition-colors duration-300">
